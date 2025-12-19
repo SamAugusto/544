@@ -9,20 +9,17 @@ def seq_transcribe(code: str = 'ACGTGAATCGATAATA' ) -> dict:
                     else "N"))) for base in reverse_code])
     # Using coding strand and replacing thymine wiht uracil to define mrna strand
     mrna_var: str = code.replace("T","U")
-    print(mrna_var)
     ## Spliting Codons
     codon_str:str = ""
     i:int = 3
-    while i <len(mrna_var) -3:
-        if i == len(mrna_var)-3:
+    while i <len(mrna_var):
+        if i == len(mrna_var):
             codon_str += (mrna_var[i-3:i])
         else:
             codon_str += (mrna_var[i-3:i]+" ")
         i +=3
-    print(codon_str)
     codon_map = codon_str.split(" ")
-    print(codon_map)
-    ptn:str = "".join([codon_table.forward_table[codon] if codon in codon_table.forward_table.keys() else "*" if codon in codon_table.stop_codons else "ERROR" for codon in codon_map ])
+    ptn:str = "".join([codon_table.forward_table[codon] if codon in codon_table.forward_table.keys() else "*" if codon in codon_table.stop_codons else "ERROR" for codon in codon_map[:-1] ])
 
 
 
@@ -30,6 +27,11 @@ def seq_transcribe(code: str = 'ACGTGAATCGATAATA' ) -> dict:
     transcribe = { "noncode" : noncode_var,"mrna":mrna_var,"ptn":ptn}
     return transcribe
 
-if __name__ == "__main__":
-   print( seq_transcribe())
+
+
+
+
+# Testing function
+#if __name__ == "__main__":
+#   print( seq_transcribe())
 
