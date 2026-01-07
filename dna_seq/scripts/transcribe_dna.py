@@ -1,5 +1,5 @@
 from Bio.Data import CodonTable
-def seq_transcribe(code: str = 'ACGTGAATCGATAATA' ) -> dict:
+def seq_transcribe(code) -> dict:
     # reversing code strand 
     reverse_code: str = code[::-1]
     # defining codon table for protein string
@@ -12,14 +12,14 @@ def seq_transcribe(code: str = 'ACGTGAATCGATAATA' ) -> dict:
     ## Spliting Codons
     codon_str:str = ""
     i:int = 3
-    while i <len(mrna_var):
+    while i <=len(mrna_var):
         if i == len(mrna_var):
             codon_str += (mrna_var[i-3:i])
         else:
             codon_str += (mrna_var[i-3:i]+" ")
         i +=3
     codon_map = codon_str.split(" ")
-    ptn:str = "".join([codon_table.forward_table[codon] if codon in codon_table.forward_table.keys() else "*" if codon in codon_table.stop_codons else "ERROR" for codon in codon_map[:-1] ])
+    ptn:str = "".join([codon_table.forward_table[codon] if codon in codon_table.forward_table.keys() else "*" if codon in codon_table.stop_codons else "" for codon in codon_map ])
 
 
 
@@ -31,7 +31,4 @@ def seq_transcribe(code: str = 'ACGTGAATCGATAATA' ) -> dict:
 
 
 
-# Testing function
-#if __name__ == "__main__":
-#   print( seq_transcribe())
 
