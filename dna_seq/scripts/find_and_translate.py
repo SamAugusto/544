@@ -43,16 +43,23 @@ def seq_findgene(sequence:str)-> str:
                             continue
                         else:
                             continue
-                    else:
+                    elif codon in stop_codons:
                         if max < count:
                             max = count
                             max_seq = codon_count+codon
                             start = False
-                            count = 0
+                            count = -1
                             codon_count = ''
                             continue
                         else:
+                            codon_count = ''
+                            count = -1
+                            start = False
                             continue
+                    else:
+                        continue
+
+
         else:
             continue
     return seq_transcribe(max_seq)["ptn"]
