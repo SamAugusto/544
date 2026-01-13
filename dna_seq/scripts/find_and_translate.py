@@ -1,5 +1,6 @@
-from transcribe_dna import seq_transcribe
+
 def seq_findgene(sequence:str)-> str:
+    from transcribe_dna import seq_transcribe
     transcribed_seq:dict = seq_transcribe(sequence)
 
     forward,reverse= transcribed_seq["mrna"], transcribed_seq["noncode"].replace("T","U")
